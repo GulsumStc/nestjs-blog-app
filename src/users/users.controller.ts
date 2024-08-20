@@ -25,6 +25,7 @@ export class UsersController {
   public createUsers(
     @Body() createUserDto: CreateUserDto)
   {
+    console.log(createUserDto instanceof CreateUserDto); 
     return createUserDto;
   }
   // instead of @Body() we can use @Req() from express
