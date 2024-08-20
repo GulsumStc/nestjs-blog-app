@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Patch, Delete, Put, Param, Query, Body, Headers, Ip, ParseIntPipe, DefaultValuePipe, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { GetUsersParamDto } from './dtos/get-users-param.dto';
 
 // http://localhost:8000/users
 @Controller('users')
@@ -10,13 +11,18 @@ export class UsersController {
   */
   @Get('/:id?')
   public getUser(
-    // ParseIntPipe is used to convert the id to numberand it is not a decorator
-    @Param('id', ParseIntPipe) id: number | undefined, // undefined because id is optional
+    /*
+    when we use ParseIntPipe, we are not able to validate an optional param (id),
+    using PaseIntPipe makes this id a required param BUT we want it to be optional so we can create
+     DTO for this
+    */
+    @Param('id') getUsersParamDto : GetUsersParamDto,
+
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number
   ) {
-    console.log(limit);
-    console.log(page);
+    console.log(getUsersParamDto);
+
     return "Get User";
   }
 
