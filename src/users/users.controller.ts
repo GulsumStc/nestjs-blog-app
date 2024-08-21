@@ -16,21 +16,18 @@ export class UsersController {
   /* 
    the @Param() decorator is used to capture route parameters from the URL.
   */
-  @Get('/:id?')
-  public getUser(
     /*
     when we use ParseIntPipe, we are not able to validate an optional param (id),
     using PaseIntPipe makes this id a required param BUT we want it to be optional so we can create
      DTO for this
     */
+  @Get('/:id?')
+  public getUser(
     @Param('id') getUsersParamDto : GetUsersParamDto,
-
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number
   ) {
-    console.log(getUsersParamDto);
-
-    return "Get User";
+    return this.usersService.findAll(getUsersParamDto, limit, page);
   }
 
 
