@@ -25,6 +25,14 @@ export class UsersService {
     ]
   }
 
+  public findOneById(id: string) {
+    return {
+      id: 1234,
+      firstName: 'Alice',
+      amail: 'a@a.com'
+    };
+  }
+
 
  
 }

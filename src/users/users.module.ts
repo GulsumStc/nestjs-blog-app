@@ -7,5 +7,6 @@ import { UsersService } from './providers/users.service';
 @Module({
   controllers: [UsersController],
   providers: [UsersService], // providers means providing this particular service to all the local components of user module
+  exports: [UsersService], // now available to other modules
 })
 export class UsersModule {}
