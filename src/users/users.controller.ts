@@ -2,10 +2,16 @@ import { Controller, Get, Post, Patch, Delete, Put, Param, Query, Body, Headers,
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUsersDto } from './dtos/patch-users.dto';
+import { UsersService } from './providers/users.service';
 
 // http://localhost:8000/users
 @Controller('users')
 export class UsersController {
+
+  constructor(
+    // inject UsersService
+    private readonly usersService: UsersService,
+  ) {}
 
   /* 
    the @Param() decorator is used to capture route parameters from the URL.
