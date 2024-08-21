@@ -1,10 +1,16 @@
-import { Injectable } from "@nestjs/common";
+import { forwardRef, Inject, Injectable } from "@nestjs/common";
 import { GetUsersParamDto } from "../dtos/get-users-param.dto";
+import { AuthService } from "src/auth/providers/auth.service";
 /* 
 All providers must be decorated with @Injectable
 */
 Injectable()
 export class UsersService {
+
+  constructor(
+     @Inject(forwardRef(() => AuthService))
+     private readonly usersService: AuthService){ }
+
 
 
   public findAll(
@@ -12,6 +18,9 @@ export class UsersService {
     limit: number,
     page: number
   ) {
+
+    const isAuthenticated = this.usersService.isAuthenticated();
+    console.log(isAuthenticated);
 
     return [
       {
