@@ -5,9 +5,7 @@ import { CreatePostDto } from '../dtos/create-post.dto';
 
 @Injectable()
 export class PostsService {
-  createPost(createPostDto: CreatePostDto) {
-    throw new Error('Method not implemented.');
-  }
+
   
   constructor(private readonly userService: UsersService){} // it is a inter-module dependency 
 
@@ -30,5 +28,8 @@ export class PostsService {
     
   }
 
+  createPost(createPostDto: CreatePostDto) {
+    return 'This action adds a new post';
+  }
 
 }

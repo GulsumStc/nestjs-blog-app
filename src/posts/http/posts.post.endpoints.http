@@ -1,0 +1,23 @@
+POST http://localhost:8000/posts
+Content-Type: application/json
+{
+  "title": "My First Post",
+  "postType": "post",
+  "slug": "my-first-post",
+  "status": "published",
+  "content": "This is the content of my first post.",
+  "schema": "{\"type\":\"object\"}",
+  "featuredImageUrl": "https://example.com/image.jpg",
+  "publishOn": "2024-08-22",
+  "tags": ["nestjs", "typescript", "backend"],
+  "metaOptions": [
+    {
+      "key": "author",
+      "value": "John Doe"
+    },
+    {
+      "key": "category",
+      "value": "Technology"
+    }
+  ]
+}
