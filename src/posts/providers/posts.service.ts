@@ -1,9 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { title } from 'process';
 import { UsersService } from 'src/users/providers/users.service';
+import { CreatePostDto } from '../dtos/create-post.dto';
 
 @Injectable()
 export class PostsService {
+  createPost(createPostDto: CreatePostDto) {
+    throw new Error('Method not implemented.');
+  }
   
   constructor(private readonly userService: UsersService){} // it is a inter-module dependency 
 
