@@ -3,19 +3,16 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUsersDto } from './dtos/patch-users.dto';
 import { UsersService } from './providers/users.service';
+import { ApiTags } from '@nestjs/swagger';
 
 // http://localhost:8000/users
 @Controller('users')
+@ApiTags('Users') // all the endpoints related to users would come under this group
 export class UsersController {
-
   constructor(
     // inject UsersService
     private readonly usersService: UsersService,
   ) {}
-
-  /* 
-   the @Param() decorator is used to capture route parameters from the URL.
-  */
     /*
     when we use ParseIntPipe, we are not able to validate an optional param (id),
     using PaseIntPipe makes this id a required param BUT we want it to be optional so we can create
@@ -43,9 +40,10 @@ export class UsersController {
 
   @Patch()
   public updateUser(@Body() patchUsersDto: PatchUsersDto) {
-    
     return patchUsersDto;
   }
+
+  
 
 
 }
