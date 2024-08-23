@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >AuthService</li>
+  <li class="breadcrumb-item" >UsersService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,10 +115,17 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/auth/providers/auth.service.ts</code>
+            <code>src/users/providers/users.service.ts</code>
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Class to connect to Users table and perform business operations</p>
+
+            </p>
 
 
 
@@ -137,11 +144,11 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#isAuthenticated" >isAuthenticated</a>
+                                <a href="#findAll" >findAll</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#login" >login</a>
+                                <a href="#findOneById" >findOneById</a>
                             </li>
                         </ul>
                     </td>
@@ -161,17 +168,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(usersService: <a href="../injectables/UsersService.html" target="_self">UsersService</a>)</code>
+<code>constructor(usersService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/auth/providers/auth.service.ts:5</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/users/providers/users.service.ts:9</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor to inject dependencies.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -180,6 +189,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -187,13 +197,19 @@
                                                         <td>usersService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/UsersService.html" target="_self" >UsersService</a></code>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
                                                         </td>
                                                   
                                                     <td>
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>The authentication service to check user authentication.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -213,71 +229,34 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="isAuthenticated"></a>
+                    <a name="findAll"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
-                        <span ><b>isAuthenticated</b></span>
-                        <a href="#isAuthenticated"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>findAll</b></span>
+                        <a href="#findAll"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>isAuthenticated()</code>
+                    <code>findAll(getUsersParamDto: <a href="../classes/GetUsersParamDto.html" target="_self">GetUsersParamDto</a>, limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/auth/providers/auth.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/users/providers/users.service.ts:27</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="login"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>login</b></span>
-                        <a href="#login"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>login(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">src/auth/providers/auth.service.ts:11</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
+                        <div class="io-description"><p>The method to get all users from the database.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -288,13 +267,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>email</td>
+                                                <td>getUsersParamDto</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            <code><a href="../classes/GetUsersParamDto.html" target="_self" >GetUsersParamDto</a></code>
                                             </td>
 
                                             <td>
@@ -302,11 +282,17 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The parameters for filtering users.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
-                                                <td>password</td>
+                                                <td>limit</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
                                             </td>
 
                                             <td>
@@ -314,7 +300,92 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The number of users to retrieve per page.</li>
+</ul>
+
+                                            </td>
                                         </tr>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The page number to retrieve.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>{}</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>An array of user objects.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="findOneById"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>findOneById</b></span>
+                        <a href="#findOneById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>findOneById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/users/providers/users.service.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>The method to get one user from the database by ID.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         <tr>
                                                 <td>id</td>
                                             <td>
@@ -326,16 +397,23 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The ID of the user to retrieve.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>    <code>{ id: number; firstName: string; amail: string; }</code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The user object with the specified ID.</p>
+
                             </div>
                 </td>
             </tr>
@@ -347,29 +425,64 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { forwardRef, Inject, Injectable } from &#x27;@nestjs/common&#x27;;
-import { UsersService } from &#x27;src/users/providers/users.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { forwardRef, Inject, Injectable } from &quot;@nestjs/common&quot;;
+import { GetUsersParamDto } from &quot;../dtos/get-users-param.dto&quot;;
+import { AuthService } from &quot;src/auth/providers/auth.service&quot;;
 
-@Injectable()
-export class AuthService {
+/**
+ * Class to connect to Users table and perform business operations
+ */
+@Injectable() // All providers must be decorated with @Injectable
+export class UsersService {
 
+  /**
+   * Constructor to inject dependencies.
+   * @param {AuthService} usersService - The authentication service to check user authentication.
+   */
   constructor(
-    @Inject(forwardRef(() &#x3D;&gt; UsersService))
-    private readonly usersService: UsersService) { }
-
-  public login(email: string, password: string, id: string) {
-    const user &#x3D; this.usersService.findOneById(&#x27;1234&#x27;);
-    //login
-    return &#x27;SAMPLE_TOKEN&#x27;;
+     @Inject(forwardRef(() &#x3D;&gt; AuthService))
+     private readonly usersService: AuthService){ }
 
 
+  /**
+   * The method to get all users from the database.
+   * @param {GetUsersParamDto} getUsersParamDto - The parameters for filtering users.
+   * @param {number} limit - The number of users to retrieve per page.
+   * @param {number} page - The page number to retrieve.
+   * @returns {Array&lt;Object&gt;} An array of user objects.
+   */
+  public findAll(
+    getUsersParamDto: GetUsersParamDto,
+    limit: number,
+    page: number
+  ) {
+    const isAuthenticated &#x3D; this.usersService.isAuthenticated();
+    console.log(isAuthenticated);
+
+    return [
+      {
+        firstName: &#x27;John&#x27;,
+        email: &#x27;j@j.com&#x27;
+      },
+      {
+        firstName: &#x27;Jane&#x27;,
+        email: &#x27;j@j.com&#x27;
+      }
+    ]
   }
 
-  public isAuthenticated() {
-    return true;
+  /**
+   * The method to get one user from the database by ID.
+   * @param {string} id - The ID of the user to retrieve.
+   * @returns {Object} The user object with the specified ID.
+   */
+  public findOneById(id: string) {
+    return {
+      id: 1234,
+      firstName: &#x27;Alice&#x27;,
+      amail: &#x27;a@a.com&#x27;
+    };
   }
-
-
 }
 </code></pre>
     </div>
@@ -414,7 +527,7 @@ export class AuthService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'AuthService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'UsersService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

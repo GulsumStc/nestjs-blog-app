@@ -171,12 +171,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/users/providers/users.service.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/users/providers/users.service.ts:9</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor to inject dependencies.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -237,14 +239,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">src/users/providers/users.service.ts:16</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">src/users/providers/users.service.ts:23</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>The method to get all users from database</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -330,14 +334,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/users/providers/users.service.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/users/providers/users.service.ts:47</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>The method to get one user from database</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -390,18 +396,25 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { forwardRef, Inject, Injectable } from &quot;@nestjs/common&quot;;
 import { GetUsersParamDto } from &quot;../dtos/get-users-param.dto&quot;;
 import { AuthService } from &quot;src/auth/providers/auth.service&quot;;
-/* 
-All providers must be decorated with @Injectable
-*/
-Injectable()
+
+/**
+ * Class to connect to Users table and perform business operations
+ */
+Injectable()// All providers must be decorated with @Injectable
 export class UsersService {
 
+  /**
+   * Constructor to inject dependencies.
+   * @param usersService 
+   */
   constructor(
      @Inject(forwardRef(() &#x3D;&gt; AuthService))
      private readonly usersService: AuthService){ }
 
 
-
+/**
+ * The method to get all users from database
+ */
   public findAll(
     getUsersParamDto: GetUsersParamDto,
     limit: number,
@@ -423,6 +436,9 @@ export class UsersService {
     ]
   }
 
+  /**
+   * The method to get one user from database
+   */
   public findOneById(id: string) {
     return {
       id: 1234,
