@@ -1,17 +1,17 @@
 POST http://localhost:8000/posts
 Content-Type: application/json
 {
-  "title": "My second Post",
+  "title": "My four Post",
   "postType": "post",
-  "slug": "my-second-post",
+  "slug": "my-four-post",
   "status": "published",
-  "content": "This is the content of my first post.",
+  "content": "This is the content.",
   "schema": "{\"type\":\"object\"}",
   "featuredImageUrl": "https://example.com/image.jpg",
-  "publishOn": "2024-08-22"
+  "publishOn": "2024-08-22",
   // "tags": ["nestjs", "typescript", "backend"],
-  // "metaOptions": {
-  //   "metaValue": "{\"fist\": true, \"second\":true}"
-  // }
+  "metaOptions": {
+    "metaValue": "{\"cascade\": true, \"cascade\":true}"
+  }
   
 }

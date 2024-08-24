@@ -34,7 +34,10 @@ export class Post {
   @Column({ type: 'timestamp', nullable: true })  // 'datetime' in mysql
   publishOn?: Date;
 
-  @OneToOne(() => MetaOption)
+  @OneToOne(() => MetaOption, {
+    cascade: true, // this will create a new metaOption when a new post is created
+    // cascade: ['insert', 'update', 'remove', 'soft-delete', 'recover']
+  })
   @JoinColumn() // will create metaOptinID column  on the Post table, responsible for creating column 
   metaOptions?: MetaOption;
 

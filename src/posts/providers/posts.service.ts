@@ -51,23 +51,9 @@ export class PostsService {
    */
   public async createPost(createPostDto: CreatePostDto): Promise<Post> {
 
-    // if the meta option exists in the createPostDto
-    // save it first so that the post can reference it
-    const metaOption = createPostDto.metaOptions
-      ? this.metaOptionRepository.create(createPostDto.metaOptions)
-      : null;
-    if (metaOption) {
-      // await the promise so that the post can reference it
-      await this.metaOptionRepository.save(metaOption);
-    }
-
+    // because of cascade  true, the meta options will be created automatically
     // create the post
     const post = this.postRepository.create(createPostDto);
-
-    // if the meta option exists, add it to the post
-    if (metaOption) {
-      post.metaOptions = metaOption;
-    }
 
     // return the post to the user
     return await this.postRepository.save(post);
