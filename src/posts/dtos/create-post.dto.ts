@@ -1,4 +1,4 @@
-import { IsArray, IsEnum, IsISO8601, isISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, Matches, MinLength, ValidateNested } from "class-validator";
+import { IsArray, IsEnum, IsISO8601, isISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, Matches, MaxLength, MinLength, ValidateNested } from "class-validator";
 import { PostStatus } from "../enums/postStatus.enum";
 import { PostType } from "../enums/postType.enum";
 import { CreatePostMetaOptionDto } from "./create-post-meta-option.dto";
@@ -31,6 +31,7 @@ export class CreatePostDto {
   @IsString()
   @IsNotEmpty()
   @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, { message: 'A slug can only contain lowercase letters, numbers, and dashes' })
+  @MaxLength(255)
   slug: string;
 
   @ApiProperty({
@@ -64,6 +65,7 @@ export class CreatePostDto {
   })
   @IsOptional()
   @IsUrl()
+  @MaxLength(1024)
   featuredImageUrl?: string;
 
   @ApiPropertyOptional({

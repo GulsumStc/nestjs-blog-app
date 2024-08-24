@@ -2,12 +2,20 @@ import { Injectable } from '@nestjs/common';
 import { title } from 'process';
 import { UsersService } from 'src/users/providers/users.service';
 import { CreatePostDto } from '../dtos/create-post.dto';
+import { Post } from '../post.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PostsService {
 
   
-  constructor(private readonly userService: UsersService){} // it is a inter-module dependency 
+  constructor(
+    private readonly userService: UsersService,// it is a inter-module dependency 
+
+    @InjectRepository(Post)
+    private postRepository: Repository<Post>
+  ) { } 
 
   public findAll(userId: string) {
     
@@ -28,8 +36,10 @@ export class PostsService {
     
   }
 
-  createPost(createPostDto: CreatePostDto) {
-    return 'This action adds a new post';
+
+  public async createPost(createPostDto: CreatePostDto) {
+    const newPost =  this.postRepository.create(createPostDto);
+    return this.postRepository.save(newPost);
   }
 
 }
