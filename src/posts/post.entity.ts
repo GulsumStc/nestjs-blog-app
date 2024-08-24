@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { PostType } from "./enums/postType.enum";
 import { PostStatus } from "./enums/postStatus.enum";
 import { CreatePostMetaOptionDto } from "../meta-options/dtos/create-post-meta-option.dto";
+import { MetaOption } from "src/meta-options/meta-option.entity";
 
 @Entity()
 export class Post {
@@ -33,9 +34,13 @@ export class Post {
   @Column({ type: 'timestamp', nullable: true })  // 'datetime' in mysql
   publishOn?: Date;
 
+  @OneToOne(() => MetaOption)
+  @JoinColumn() // will create metaOptinID column  on the Post table, responsible for creating column 
+  metaOptions?: MetaOption;
+
+  // you don't have to use joinColumn if you use bidirectional relationship 
   
- // work on these later on relationships
+
   tags?: string[];
-  metaOptions?: CreatePostMetaOptionDto[];
 
 }

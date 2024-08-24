@@ -38,8 +38,8 @@ export class PostsService {
 
 
   public async createPost(createPostDto: CreatePostDto) {
-    const newPost =  this.postRepository.create(createPostDto);
-    return this.postRepository.save(newPost);
+
+    return 'This action adds a new post';
   }
 
 }
