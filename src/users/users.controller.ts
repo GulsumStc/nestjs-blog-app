@@ -53,8 +53,8 @@ export class UsersController {
   public createUsers(
     @Body() createUserDto: CreateUserDto)
   {
-    console.log(createUserDto instanceof CreateUserDto); 
-    return createUserDto;
+    // console.log(createUserDto instanceof CreateUserDto); 
+    return this.usersService.createUser(createUserDto);
   }
   // instead of @Body() we can use @Req() from express
 
