@@ -3,7 +3,7 @@ import { IsJSON, IsNotEmpty, isNotEmpty, IsString, isString } from "class-valida
 export class CreatePostMetaOptionDto {
 
   @IsNotEmpty()
-  @IsJSON()
+  @IsString()
   metaValue: string; // or JSON
 
 }
