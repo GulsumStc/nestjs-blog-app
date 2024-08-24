@@ -89,30 +89,24 @@ export class CreatePostDto {
 
 
   @ApiPropertyOptional({
-    type: 'array',
+    type: 'object',
     required: false,
     items: {
       type: 'object',
       properties: {
-        key: {
-          type: 'string',
-          description: 'The key can be string identifier for your meta option',
-          example: 'key1',
-        },
-        value: {
-          type: 'string',
-          description: 'The value can be any type',
-          example: 'value1',
+        metaValue: {
+          type: 'json',
+          description: 'The metaValue is a json string',
+          example: '{\"key\":\"value\"}',
         }
       },
     }
   
   })
   @IsOptional()
-  @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreatePostMetaOptionDto)
-  metaOptions?: CreatePostMetaOptionDto[];// this is not required property but when you pass metaOptions the key value pair is required object
+  metaOptions?: CreatePostMetaOptionDto | null;// this is not required property but when you pass metaOptions the key value pair is required object
   
 
 }
