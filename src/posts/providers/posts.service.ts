@@ -23,22 +23,19 @@ export class PostsService {
 
   ) { } 
 
-  public findAll(userId: string) {
+  public async findAll(userId: string) {
     
     const user = this.userService.findOneById(userId);
-    
-    return [
-      {
-        user: user,
-        title: 'My first post',
-        content: 'This is my first post'
-      },
-      {
-        user: user,
-        title: 'My second post',
-        content: 'This is my second post'
+    let posts = await this.postRepository.find({
+    /**
+     * Indicates what relations of entity should be loaded (simplified left join form).
+     */
+      relations: {
+        metaOptions: true //  to get the meta options with the post
       }
-    ]
+    });
+
+    return posts;
     
   }
 
