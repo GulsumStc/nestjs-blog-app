@@ -37,7 +37,7 @@ export class Post {
   @OneToOne(() => MetaOption, {
     cascade: true, // this will create a new metaOption when a new post is created
     // cascade: ['insert', 'update', 'remove', 'soft-delete', 'recover']
-    // eager: true, //when ever typeorm fetch a post, it will fetch the metaOptions as well but for that we used relation in post service
+    eager: true, //when ever typeorm fetch a post, it will fetch the metaOptions as well but for that we used relation in post service
   })
   @JoinColumn() // will create metaOptinID column  on the Post table, responsible for creating column 
   metaOptions?: MetaOption;

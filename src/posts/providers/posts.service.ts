@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { title } from 'process';
 import { UsersService } from 'src/users/providers/users.service';
 import { CreatePostDto } from '../dtos/create-post.dto';
@@ -16,17 +16,17 @@ export class PostsService {
     private readonly userService: UsersService,// it is a inter-module dependency 
 
     @InjectRepository(Post)
-    private postRepository: Repository<Post>,
+    private postsRepository: Repository<Post>,
 
     @InjectRepository(MetaOption)
-    private metaOptionRepository: Repository<MetaOption>
+    private metaOptionsRepository: Repository<MetaOption>
 
   ) { } 
 
   public async findAll(userId: string) {
     
     const user = this.userService.findOneById(userId);
-    let posts = await this.postRepository.find({
+    let posts = await this.postsRepository.find({
     /**
      * Indicates what relations of entity should be loaded (simplified left join form).
      */
@@ -50,11 +50,31 @@ export class PostsService {
 
     // because of cascade  true, the meta options will be created automatically
     // create the post
-    const post = this.postRepository.create(createPostDto);
+    const post = this.postsRepository.create(createPostDto);
 
     // return the post to the user
-    return await this.postRepository.save(post);
+    return await this.postsRepository.save(post);
 
+  }
+
+
+  public async delete(id: number) {
+
+    // find the post
+    let post = await this.postsRepository.findOneBy({ id });
+    console.log(post);
+
+    // delete the post
+    await this.postsRepository.delete(id);
+
+    // delete meta options
+    await this.metaOptionsRepository.delete(post.metaOptions.id)
+    
+    return {
+      message: 'Post deleted successfully'
+    }
+    
+    
   }
 
 
