@@ -40,7 +40,7 @@ export class Post {
     // cascade: ['insert', 'update', 'remove', 'soft-delete', 'recover']
     eager: true, //when ever typeorm fetch a post, it will fetch the metaOptions as well but for that we used relation in post service
   })
-  @JoinColumn() // will create metaOptinID column  on the Post table, responsible for creating column 
+  // @JoinColumn() // will create metaOptinID column  on the Post table, responsible for creating column 
   metaOptions?: MetaOption;
 
   // you don't have to use joinColumn if you use bidirectional relationship 

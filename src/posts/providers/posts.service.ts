@@ -4,7 +4,7 @@ import { UsersService } from 'src/users/providers/users.service';
 import { CreatePostDto } from '../dtos/create-post.dto';
 import { Post } from '../post.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { JoinColumn, Repository } from 'typeorm';
 import { MetaOption } from 'src/meta-options/meta-option.entity';
 
 @Injectable()
@@ -60,29 +60,17 @@ export class PostsService {
 
   public async delete(id: number) {
 
-    // // find the post
-    let post = await this.postsRepository.findOneBy({ id });
-    // console.log(post);
-
-    // // delete the post
-    // await this.postsRepository.delete(id);
-
-    // // delete meta options
-    // await this.metaOptionsRepository.delete(post.metaOptions.id)
-
-    let inversePost = await this.metaOptionsRepository.find({
-      where: { id: post.metaOptions.id },
-      relations: { post: true }
-    })
-
-    console.log(inversePost)
+    // delete the post
+    await this.postsRepository.delete(id);
+    // on delete cascade: the meta options will be deleted automatically 
 
     
     return {
-      message: 'Post deleted successfully'
+      message: 'Post deleted successfully with metaoptions',
+      postId: id,
     }
     
-    
+   
   }
 
 
