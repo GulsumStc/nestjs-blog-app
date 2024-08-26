@@ -3,7 +3,7 @@ Content-Type: application/json
 {
   "title": "My four Post",
   "postType": "post",
-  "slug": "my-four-post",
+  "slug": "my-fo8r-p0st",
   "status": "published",
   "content": "This is the content.",
   "schema": "{\"type\":\"object\"}",
@@ -12,6 +12,7 @@ Content-Type: application/json
   // "tags": ["nestjs", "typescript", "backend"],
   "metaOptions": {
     "metaValue": "{\"cascade\": true, \"cascade\":true}"
-  }
+  },
+  "authorId":1
   
 }

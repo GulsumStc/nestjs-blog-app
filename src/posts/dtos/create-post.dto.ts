@@ -1,4 +1,4 @@
-import { IsArray, IsEnum, IsISO8601, isISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, Matches, MaxLength, MinLength, ValidateNested } from "class-validator";
+import { IsArray, IsEnum, IsInt, IsISO8601, isISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, Matches, MaxLength, MinLength, ValidateNested } from "class-validator";
 import { PostStatus } from "../enums/postStatus.enum";
 import { PostType } from "../enums/postType.enum";
 import { CreatePostMetaOptionDto } from "../../meta-options/dtos/create-post-meta-option.dto";
@@ -107,6 +107,13 @@ export class CreatePostDto {
   @ValidateNested({ each: true })
   @Type(() => CreatePostMetaOptionDto)
   metaOptions?: CreatePostMetaOptionDto | null;// this is not required property but when you pass metaOptions the key value pair is required object
-  
 
+  @ApiProperty({
+    type: 'integer',
+    required: true,
+    example: 1,
+  })
+  @IsInt()
+  @IsNotEmpty()
+  authorId: number;
 }

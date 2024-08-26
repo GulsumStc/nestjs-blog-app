@@ -1,8 +1,9 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { PostType } from "./enums/postType.enum";
 import { PostStatus } from "./enums/postStatus.enum";
 import { CreatePostMetaOptionDto } from "../meta-options/dtos/create-post-meta-option.dto";
 import { MetaOption } from "src/meta-options/meta-option.entity";
+import { User } from "src/users/user.entity";
 
 @Entity()
 export class Post {
@@ -16,7 +17,7 @@ export class Post {
   @Column({ type: 'enum', enum: PostType, nullable: false, default: PostType.POST }) 
   postType: PostType;
 
-  @Column({ type: 'varchar', length: 255, nullable: false }) 
+  @Column({ type: 'varchar', length: 255, nullable: false, unique: true }) 
   slug: string;
 
   @Column({ type: 'enum', enum: PostStatus, nullable: false, default: PostStatus.DRAFT }) 
@@ -43,8 +44,14 @@ export class Post {
   // @JoinColumn() // will create metaOptinID column  on the Post table, responsible for creating column 
   metaOptions?: MetaOption;
 
-  // you don't have to use joinColumn if you use bidirectional relationship 
+  // you don't have to use joinColumn if you use bidirectional relationship
   
+  
+  @ManyToOne(()=> User, (user)=>user.posts)
+  author: User;
+
+
+
 
   tags?: string[];
 

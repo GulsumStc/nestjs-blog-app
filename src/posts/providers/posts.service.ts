@@ -25,7 +25,6 @@ export class PostsService {
 
   public async findAll(userId: string) {
     
-    const user = this.userService.findOneById(userId);
     let posts = await this.postsRepository.find({
     /**
      * Indicates what relations of entity should be loaded (simplified left join form).
@@ -48,9 +47,14 @@ export class PostsService {
    */
   public async createPost(createPostDto: CreatePostDto): Promise<Post> {
 
-    // because of cascade  true, the meta options will be created automatically
+    // Find author from database based on authorId. before authentication we do something like this
+    let author = await this.userService.findOneById(createPostDto.authorId);
+
     // create the post
-    const post = this.postsRepository.create(createPostDto);
+    const post = this.postsRepository.create({
+      ...createPostDto,
+      author: author // assign the author to the post
+    });
 
     // return the post to the user
     return await this.postsRepository.save(post);
