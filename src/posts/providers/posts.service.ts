@@ -26,11 +26,10 @@ export class PostsService {
   public async findAll(userId: string) {
     
     let posts = await this.postsRepository.find({
-    /**
-     * Indicates what relations of entity should be loaded (simplified left join form).
-     */
-      relations: {
-        metaOptions: true //  to get the meta options with the post
+  
+      relations: { //Indicates what relations of entity should be loaded (simplified left join form).
+        metaOptions: true, //  to get the meta options with the post
+        // author: true
       }
     });
 
