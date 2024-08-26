@@ -34,7 +34,8 @@ export class Post {
   @Column({ type: 'timestamp', nullable: true })  // 'datetime' in mysql
   publishOn?: Date;
 
-  @OneToOne(() => MetaOption, {
+  @OneToOne(() => MetaOption, (metaOptions) => metaOptions.post,
+    {
     cascade: true, // this will create a new metaOption when a new post is created
     // cascade: ['insert', 'update', 'remove', 'soft-delete', 'recover']
     eager: true, //when ever typeorm fetch a post, it will fetch the metaOptions as well but for that we used relation in post service

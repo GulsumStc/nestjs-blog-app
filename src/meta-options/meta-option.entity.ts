@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Post } from "src/posts/post.entity";
+import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class MetaOption {
@@ -17,5 +18,10 @@ export class MetaOption {
 
   @UpdateDateColumn()
   updateDate: Date;
+
+  // creting bi-directional relationship between post and meta option
+  
+  @OneToOne(()=>Post, (post)=>post.metaOptions)
+  post: Post;
 
 }
