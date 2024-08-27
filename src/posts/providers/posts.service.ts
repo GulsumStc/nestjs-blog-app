@@ -34,6 +34,7 @@ export class PostsService {
       relations: { //Indicates what relations of entity should be loaded (simplified left join form).
         metaOptions: true, //  to get the meta options with the post
         // author: true
+        // tags: true // to get the tags with the post
       }
     });
 

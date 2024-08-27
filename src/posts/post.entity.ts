@@ -63,7 +63,9 @@ export class Post {
   */
 
   // the owner of relation is the post
-  @ManyToMany(() => Tag)
+  @ManyToMany(() => Tag, {
+    eager: true
+  })
   @JoinTable()
   tags?: Tag[];
 
