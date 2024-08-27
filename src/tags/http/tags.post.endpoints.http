@@ -1,8 +1,8 @@
 POST http://localhost:8000/tags
 Content-Type: application/json
 {
-  "name": "example-tag",
-  "slug": "example-tag-slug",
+  "name": "example-tag2",
+  "slug": "example-tag-slug2",
   "description": "This is an example tag description.",
   "schema": "{\"key\": \"value\"}",
   "featuredImageUrl": "https://example.com/image.jpg"

@@ -1,4 +1,4 @@
-import { Inject, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException, NotFoundException, Patch } from '@nestjs/common';
 import { title } from 'process';
 import { UsersService } from 'src/users/providers/users.service';
 import { CreatePostDto } from '../dtos/create-post.dto';
@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { JoinColumn, Repository } from 'typeorm';
 import { MetaOption } from 'src/meta-options/meta-option.entity';
 import { TagsService } from 'src/tags/providers/tags.service';
+import { PatchPostDto } from '../dtos/patch-post.dto';
 
 @Injectable()
 export class PostsService {
@@ -68,6 +69,37 @@ export class PostsService {
     return await this.postsRepository.save(post);
 
   }
+
+
+  @Patch()
+  public async updatePost(patchPostDto: PatchPostDto) {
+    
+    // find the tags
+    const tags = await this.tagsService.findMultipleTags(patchPostDto.tags);
+
+    // find the post
+    const post = await this.postsRepository.findOne({
+      where: {
+        id: patchPostDto.id
+      }
+    });
+    
+    // update the properties of the post
+    post.title = patchPostDto.title ?? post.title; // nullish coalescing operator
+    post.content = patchPostDto.content ?? post.content;
+    post.featuredImageUrl = patchPostDto.featuredImageUrl ?? post.featuredImageUrl;
+    post.publishOn = patchPostDto.publishOn ?? post.publishOn;
+    post.status = patchPostDto.status ?? post.status;
+    post.postType = patchPostDto.postType ?? post.postType;
+    post.slug = patchPostDto.slug ?? post.slug;
+
+    // assigned new tags
+    post.tags = tags ?? post.tags;
+
+    // save the post and return the updated post
+    return await this.postsRepository.save(post);
+
+  } 
 
 
   public async delete(id: number) {
