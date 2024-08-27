@@ -1,9 +1,10 @@
-import { IsArray, IsEnum, IsInt, IsISO8601, isISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, Matches, MaxLength, MinLength, ValidateNested } from "class-validator";
+import { IsArray, IsEnum, IsIn, IsInt, IsISO8601, isISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, Matches, MaxLength, MinLength, ValidateNested } from "class-validator";
 import { PostStatus } from "../enums/postStatus.enum";
 import { PostType } from "../enums/postType.enum";
 import { CreatePostMetaOptionDto } from "../../meta-options/dtos/create-post-meta-option.dto";
 import { Type } from "class-transformer";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { Tag } from "src/tags/tag.entity";
 
 export class CreatePostDto {
 
@@ -79,13 +80,12 @@ export class CreatePostDto {
   
   @ApiPropertyOptional({
     description: 'The tags of the post',
-    example: ['tag1', 'tag2', 'tag3'],
+    example: ['1', '2', '3'],
   })
   @IsOptional()
   @IsArray()
-  @IsString({ each: true })
-  @MinLength(3, { each: true })
-  tags?: string[];
+  @IsInt({ each: true })
+  tags?: number[];
 
 
   @ApiPropertyOptional({

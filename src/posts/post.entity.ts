@@ -1,9 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { PostType } from "./enums/postType.enum";
 import { PostStatus } from "./enums/postStatus.enum";
 import { CreatePostMetaOptionDto } from "../meta-options/dtos/create-post-meta-option.dto";
 import { MetaOption } from "src/meta-options/meta-option.entity";
 import { User } from "src/users/user.entity";
+import { Tag } from "src/tags/tag.entity";
 
 @Entity()
 export class Post {
@@ -52,9 +53,18 @@ export class Post {
   })
   author: User;
 
+  /* 
+  ManyToMany:
+  - Defines a many-to-many relationship between two entities.
+  - Each entity can have multiple related entities on the other side of the relationship.
+  - Requires a join (junction) table to store the relationships.
+  - Use @ManyToMany decorator on both entities to establish the relationship.
+  - One side of the relationship should use @JoinTable to define the junction table
+  */
 
-
-
-  tags?: string[];
+  // the owner of relation is the post
+  @ManyToMany(() => Tag)
+  @JoinTable()
+  tags?: Tag[];
 
 }

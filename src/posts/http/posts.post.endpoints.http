@@ -3,7 +3,7 @@ Content-Type: application/json
 {
   "title": "My four Post",
   "postType": "post",
-  "slug": "my-fo8r-p0st",
+  "slug": "my-fr-p0st",
   "status": "published",
   "content": "This is the content.",
   "schema": "{\"type\":\"object\"}",
@@ -13,6 +13,7 @@ Content-Type: application/json
   "metaOptions": {
     "metaValue": "{\"cascade\": true, \"cascade\":true}"
   },
-  "authorId":1
+  "authorId":1,
+  "tags":[1]
   
 }

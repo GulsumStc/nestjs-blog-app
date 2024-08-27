@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { title } from 'process';
 import { UsersService } from 'src/users/providers/users.service';
 import { CreatePostDto } from '../dtos/create-post.dto';
@@ -6,6 +6,7 @@ import { Post } from '../post.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JoinColumn, Repository } from 'typeorm';
 import { MetaOption } from 'src/meta-options/meta-option.entity';
+import { TagsService } from 'src/tags/providers/tags.service';
 
 @Injectable()
 export class PostsService {
@@ -19,7 +20,10 @@ export class PostsService {
     private postsRepository: Repository<Post>,
 
     @InjectRepository(MetaOption)
-    private metaOptionsRepository: Repository<MetaOption>
+    private metaOptionsRepository: Repository<MetaOption>,
+
+    @Inject(TagsService)
+    private tagsService: TagsService
 
   ) { } 
 
@@ -49,10 +53,14 @@ export class PostsService {
     // Find author from database based on authorId. before authentication we do something like this
     let author = await this.userService.findOneById(createPostDto.authorId);
 
+    // finds tags
+    const tags = await this.tagsService.findMultipleTags(createPostDto.tags);
+
     // create the post
     const post = this.postsRepository.create({
       ...createPostDto,
-      author: author // assign the author to the post
+      author: author,
+      tags: tags // assign the author to the post
     });
 
     // return the post to the user
