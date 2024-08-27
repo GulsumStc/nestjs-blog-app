@@ -18,9 +18,22 @@ export class TagsController {
   }
 
 
+  //! http://localhost:8000/tags?id=1
+
   @Delete()
   public deleteTag(@Query('id', ParseIntPipe) id: number) {
     return this.tagsService.delete(id);
   }
+  
+  //! localhost:8000/tags/soft-delete?id=1
+
+  @Delete('soft-delete')
+  public softDelete(@Query('id', ParseIntPipe) id: number) {
+    // return this.tagsService.delete(id);
+
+    return this.tagsService.softDelete(id);
+  }
+
+
 }
 

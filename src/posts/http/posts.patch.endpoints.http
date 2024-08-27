@@ -1,16 +1,16 @@
 PATCH  http://localhost:8000/posts
 Content-Type: application/json
 {
-  "id":26,
+  "id":24,
   "title": "TypeScript",
   "postType": "post",
-  "slug": "my-fr-p0st",
+  "slug": "my-fr-adadap0st",
   "status": "draft",
   "content": "This is the content.",
   // "tags": ["nestjs", "typescript", "backend"],
   "metaOptions": {
     "metaValue": "{\"cascade\": true, \"cascade\":true}"
   },
-  "tags":[1,2]
+  "tags":[1,3]
   
 }
