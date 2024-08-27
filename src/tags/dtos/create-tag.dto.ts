@@ -3,7 +3,7 @@ import { IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, Matches, MaxLength, Mi
 import { Entity } from "typeorm";
 
 @Entity()
-export class Tag {
+export class CreateTagDto {
 
   @ApiProperty()
   @IsString()
