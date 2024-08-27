@@ -34,4 +34,18 @@ export class TagsService {
 
   }
 
+  public async delete(id: number) {
+
+    // senario: when we delete a tag, The particular tag should end relationship with the posts
+
+
+    await this.tagsRepository.delete(id);
+    return {
+      message: 'Tag deleted successfully',
+      tagId: id
+    }
+    
+    
+  }
+
 }
