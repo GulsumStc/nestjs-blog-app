@@ -11,6 +11,7 @@ import { TagsModule } from './tags/tags.module';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { ConfigModule } from '@nestjs/config';
 
+const ENV = process.env.NODE_ENV;
 
 @Module({
   imports: [
@@ -18,7 +19,9 @@ import { ConfigModule } from '@nestjs/config';
     PostsModule,
     AuthModule,
     ConfigModule.forRoot({
-      isGlobal: true //makes it available to all modules or you would have to import it every other module that you create and when ever you want to use the config modulue
+      isGlobal: true, //makes it available to all modules or you would have to import it every other module that you create and when ever you want to use the config modulue
+      // envFilePath: ['.env.development']
+      envFilePath: !ENV  ? '.env' : `.env.${ENV}`, //
     }),
 
     /**

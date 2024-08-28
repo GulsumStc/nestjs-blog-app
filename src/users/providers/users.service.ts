@@ -1,10 +1,10 @@
 import { forwardRef, Inject, Injectable } from "@nestjs/common";
 import { GetUsersParamDto } from "../dtos/get-users-param.dto";
-import { AuthService } from "src/auth/providers/auth.service";
 import { Repository } from "typeorm";
 import { User } from "../user.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateUserDto } from "../dtos/create-user.dto";
+import { ConfigService } from "@nestjs/config";
 
 /**
  * Class to connect to Users table and perform business operations
@@ -19,7 +19,9 @@ export class UsersService {
   constructor(
     /* injecting User Repository */
     @InjectRepository(User)
-    private userRepository: Repository<User>
+    private userRepository: Repository<User>,
+
+    private readonly configService:ConfigService
   
   ) { }
 
@@ -50,6 +52,12 @@ export class UsersService {
     limit: number,
     page: number
   ) {
+
+
+    /* All the value inside the enviroment variable are strings by default  */
+    const enviroment = this.configService.get<string>('S3_BUCKET');
+    console.log(enviroment)
+
     return [
       {
         firstName: 'John',
