@@ -10,6 +10,7 @@ import { Post } from './posts/post.entity';
 import { TagsModule } from './tags/tags.module';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { appConfig } from './config/app.config';
 
 const ENV = process.env.NODE_ENV;
 console.log(ENV);
@@ -21,8 +22,8 @@ console.log(ENV);
     AuthModule,
     ConfigModule.forRoot({
       isGlobal: true, //makes it available to all modules or you would have to import it every other module that you create and when ever you want to use the config modulue
-      envFilePath: ['.env.development']
-      // envFilePath: !ENV  ? '.env' : `.env.${ENV}`, //
+      envFilePath: !ENV ? '.env' : `.env.${ENV}`, 
+      load: [appConfig],
     }),
 
     /**
@@ -55,15 +56,15 @@ console.log(ENV);
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-      type: 'postgres',
-      entities: [User, Post],
-      autoLoadEntities: true,
-      synchronize: true,
-      host: configService.get('DATABASE_HOST'),
-      port: configService.get('DATABASE_PORT'),
-      username: configService.get('DATABASE_USER'),
-      password: configService.get('DATABASE_PASSWORD'),
-      database: configService.get('DATABASE_NAME'),
+        type: 'postgres',
+        //entities: [User],
+        synchronize: configService.get('database.synchronize'),
+        port: +configService.get('database.port'), 
+        username: configService.get('database.user'),
+        password: configService.get('database.password'),
+        host: configService.get('database.host'),
+        autoLoadEntities: configService.get('database.autoLoadEntities'),
+        database: configService.get('database.name'),
     
      })
     }),
@@ -71,8 +72,6 @@ console.log(ENV);
     TagsModule,
 
     MetaOptionsModule,
-
-    MetaOptionsModule
   ],
   controllers: [AppController],
   providers: [AppService],
