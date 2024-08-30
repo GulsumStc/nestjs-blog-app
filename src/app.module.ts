@@ -12,6 +12,7 @@ import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
+import  environmentValidation from './config/environment.validation';
 
 const ENV = process.env.NODE_ENV;
 console.log(ENV);
@@ -25,6 +26,7 @@ console.log(ENV);
       isGlobal: true, //makes it available to all modules or you would have to import it every other module that you create and when ever you want to use the config modulue
       envFilePath: !ENV ? '.env' : `.env.${ENV}`, 
       load: [appConfig, databaseConfig],
+      validationSchema: environmentValidation
     }),
 
     /**
