@@ -4,7 +4,8 @@ import { Repository } from "typeorm";
 import { User } from "../user.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateUserDto } from "../dtos/create-user.dto";
-import { ConfigService } from "@nestjs/config";
+import { ConfigService, ConfigType } from "@nestjs/config";
+import profileConfig from "../config/profile.config";
 
 /**
  * Class to connect to Users table and perform business operations
@@ -21,7 +22,8 @@ export class UsersService {
     @InjectRepository(User)
     private userRepository: Repository<User>,
 
-    private readonly configService:ConfigService
+    @Inject(profileConfig.KEY)
+    private readonly privateConfigration:ConfigType<typeof profileConfig>,
   
   ) { }
 
@@ -54,9 +56,8 @@ export class UsersService {
   ) {
 
 
-    /* All the value inside the enviroment variable are strings by default  */
-    const enviroment = this.configService.get<string>('S3_BUCKET');
-    console.log(enviroment)
+    // test the new config
+    console.log(this.privateConfigration);
 
     return [
       {
