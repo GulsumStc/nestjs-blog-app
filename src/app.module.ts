@@ -10,7 +10,8 @@ import { Post } from './posts/post.entity';
 import { TagsModule } from './tags/tags.module';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { appConfig } from './config/app.config';
+import appConfig from './config/app.config';
+import databaseConfig from './config/database.config';
 
 const ENV = process.env.NODE_ENV;
 console.log(ENV);
@@ -23,7 +24,7 @@ console.log(ENV);
     ConfigModule.forRoot({
       isGlobal: true, //makes it available to all modules or you would have to import it every other module that you create and when ever you want to use the config modulue
       envFilePath: !ENV ? '.env' : `.env.${ENV}`, 
-      load: [appConfig],
+      load: [appConfig, databaseConfig],
     }),
 
     /**
