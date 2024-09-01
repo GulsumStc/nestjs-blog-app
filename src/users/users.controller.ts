@@ -50,13 +50,17 @@ export class UsersController {
 
 
   @Post()
-  public createUsers(
-    @Body() createUserDto: CreateUserDto)
-  {
-    // console.log(createUserDto instanceof CreateUserDto); 
+  public createUsers(@Body() createUserDto: CreateUserDto){
     return this.usersService.createUser(createUserDto);
   }
-  // instead of @Body() we can use @Req() from express
+
+  @Post('create-many')
+  public createManyUsers(@Body() createUserDto: CreateUserDto[]){
+    return this.usersService.createMany(createUserDto);
+  }
+
+
+ 
 
 
   @Patch()
