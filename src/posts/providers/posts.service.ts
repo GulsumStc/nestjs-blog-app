@@ -8,6 +8,7 @@ import { JoinColumn, Repository } from 'typeorm';
 import { MetaOption } from 'src/meta-options/meta-option.entity';
 import { TagsService } from 'src/tags/providers/tags.service';
 import { PatchPostDto } from '../dtos/patch-post.dto';
+import { GetPostsDto } from '../dtos/get-posts.dto';
 
 @Injectable()
 export class PostsService {
@@ -28,7 +29,7 @@ export class PostsService {
 
   ) { } 
 
-  public async findAll(userId: string) {
+  public async findAll( postQuery: GetPostsDto,  userId: string) {
     
     let posts = await this.postsRepository.find({
   
@@ -36,7 +37,11 @@ export class PostsService {
         metaOptions: true, //  to get the meta options with the post
         // author: true
         // tags: true // to get the tags with the post
-      }
+      },
+
+      skip: (postQuery.page - 1) * postQuery.limit, // how many posts should be skipped
+      take: postQuery.limit,  // how many posts should be returned
+
     });
 
     return posts;
