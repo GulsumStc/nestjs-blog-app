@@ -9,11 +9,13 @@ import { MetaOption } from 'src/meta-options/meta-option.entity';
 import { TagsService } from 'src/tags/providers/tags.service';
 import { PatchPostDto } from '../dtos/patch-post.dto';
 import { GetPostsDto } from '../dtos/get-posts.dto';
+import { privateDecrypt } from 'crypto';
+import { PaginationProvider } from 'src/common/pagination/providers/pagination.provider';
 
 @Injectable()
 export class PostsService {
 
-  
+
   constructor(
 
     private readonly userService: UsersService,// it is a inter-module dependency 
@@ -25,28 +27,39 @@ export class PostsService {
     private metaOptionsRepository: Repository<MetaOption>,
 
     @Inject(TagsService)
-    private tagsService: TagsService
+    private tagsService: TagsService,
 
-  ) { } 
+    /* injecting paginationProvider */
+    @Inject(PaginationProvider)
+    private readonly paginationProvider: PaginationProvider
 
-  public async findAll( postQuery: GetPostsDto,  userId: string) {
-    
-    let posts = await this.postsRepository.find({
+  ) { }
+  public async findAll(postQuery: GetPostsDto, userId: string) {
+
+    // The following code is commented out as it was a hard-coded approach for pagination.
+    // It directly uses the repository's find method with pagination options.
+    // let posts = await this.postsRepository.find({
+    //   relations: { // Indicates what relations of entity should be loaded (simplified left join form).
+    //     metaOptions: true, // To get the meta options with the post
+    //     // author: true
+    //     // tags: true // To get the tags with the post
+    //   },
+    //    skip: (postQuery.page - 1) * postQuery.limit, // How many posts should be skipped
+    //    take: postQuery.limit,  // How many posts should be returned
+    // });
   
-      relations: { //Indicates what relations of entity should be loaded (simplified left join form).
-        metaOptions: true, //  to get the meta options with the post
-        // author: true
-        // tags: true // to get the tags with the post
+    // Using PaginationProvider to handle pagination logic more flexibly.
+    let posts = await this.paginationProvider.paginateQuery(
+      {
+        limit: postQuery.limit,
+        page: postQuery.page
       },
-
-      skip: (postQuery.page - 1) * postQuery.limit, // how many posts should be skipped
-      take: postQuery.limit,  // how many posts should be returned
-
-    });
-
+      this.postsRepository,
+    );
+  
     return posts;
-    
   }
+  
 
 
   /**
@@ -78,7 +91,7 @@ export class PostsService {
 
   @Patch()
   public async updatePost(patchPostDto: PatchPostDto) {
-    
+
     // find the tags
     const tags = await this.tagsService.findMultipleTags(patchPostDto.tags);
 
@@ -88,7 +101,7 @@ export class PostsService {
         id: patchPostDto.id
       }
     });
-    
+
     // update the properties of the post
     post.title = patchPostDto.title ?? post.title; // nullish coalescing operator
     post.content = patchPostDto.content ?? post.content;
@@ -104,7 +117,7 @@ export class PostsService {
     // save the post and return the updated post
     return await this.postsRepository.save(post);
 
-  } 
+  }
 
 
   public async delete(id: number) {
@@ -113,13 +126,13 @@ export class PostsService {
     await this.postsRepository.delete(id);
     // on delete cascade: the meta options will be deleted automatically 
 
-    
+
     return {
       message: 'Post deleted successfully with metaoptions',
       postId: id,
     }
-    
-   
+
+
   }
 
 

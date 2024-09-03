@@ -7,6 +7,7 @@ import { Post } from './post.entity';
 import { MetaOptionsModule } from 'src/meta-options/meta-options.module';
 import { MetaOption } from 'src/meta-options/meta-option.entity';
 import { TagsModule } from 'src/tags/tags.module';
+import { PaginationModule } from 'src/common/pagination/pagination.module';
 
 
 @Module({
@@ -16,6 +17,7 @@ import { TagsModule } from 'src/tags/tags.module';
     UsersModule,// import the entire module not specific service, importing the entire module   would import the service itself - only providers exported from usermodule
     TagsModule,
     TypeOrmModule.forFeature([Post, MetaOption]),
+    PaginationModule
   ], 
 })
 export class PostsModule {}
