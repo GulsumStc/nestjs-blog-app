@@ -11,6 +11,7 @@ import { PatchPostDto } from '../dtos/patch-post.dto';
 import { GetPostsDto } from '../dtos/get-posts.dto';
 import { privateDecrypt } from 'crypto';
 import { PaginationProvider } from 'src/common/pagination/providers/pagination.provider';
+import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
 
 @Injectable()
 export class PostsService {
@@ -34,7 +35,7 @@ export class PostsService {
     private readonly paginationProvider: PaginationProvider
 
   ) { }
-  public async findAll(postQuery: GetPostsDto, userId: string) {
+  public async findAll(postQuery: GetPostsDto, userId: string): Promise<Paginated<Post>> {
 
     
     let posts = await this.paginationProvider.paginateQuery(
