@@ -36,19 +36,7 @@ export class PostsService {
   ) { }
   public async findAll(postQuery: GetPostsDto, userId: string) {
 
-    // The following code is commented out as it was a hard-coded approach for pagination.
-    // It directly uses the repository's find method with pagination options.
-    // let posts = await this.postsRepository.find({
-    //   relations: { // Indicates what relations of entity should be loaded (simplified left join form).
-    //     metaOptions: true, // To get the meta options with the post
-    //     // author: true
-    //     // tags: true // To get the tags with the post
-    //   },
-    //    skip: (postQuery.page - 1) * postQuery.limit, // How many posts should be skipped
-    //    take: postQuery.limit,  // How many posts should be returned
-    // });
-  
-    // Using PaginationProvider to handle pagination logic more flexibly.
+    
     let posts = await this.paginationProvider.paginateQuery(
       {
         limit: postQuery.limit,
