@@ -8,6 +8,7 @@ import { ConfigService, ConfigType } from "@nestjs/config";
 import profileConfig from "../config/profile.config";
 import { UsersCreateManyProvider } from "./users-create-many.provider";
 import { CreateManyUsersDto } from "../dtos/create-many-users.dto";
+import { CreateUserProvider } from "./create-user.provider";
 
 /**
  * Class to connect to Users table and perform business operations
@@ -30,6 +31,8 @@ export class UsersService {
     /* injecting UsersCreateManyProvider */
     private readonly usersCreateManyProvider: UsersCreateManyProvider,
 
+    private readonly createUserProvider: CreateUserProvider
+
 
   
   ) { }
@@ -37,14 +40,7 @@ export class UsersService {
 
   public async createUser(createUserDto: CreateUserDto) {
     
-    // check if user exists with same email
-      const existingUser = await this.userRepository.findOne({ where: { email: createUserDto.email } })
-    // handle some exception
-       //......
-    // create user
-    let newUser = this.userRepository.create(createUserDto);
-    const savedUser = await this.userRepository.save(newUser);
-    return savedUser;
+    return await this.createUserProvider.createUser(createUserDto);
 
   }
 
