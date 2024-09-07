@@ -2,6 +2,9 @@ import { forwardRef, Inject, Injectable, UnauthorizedException } from '@nestjs/c
 import { UsersService } from 'src/users/providers/users.service';
 import { SigninDto } from '../dtos/signin.dto';
 import { HashingProvider } from './hashing.provider';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigType } from '@nestjs/config';
+import jwtConfig from '../config/jwt.config';
 
 
 @Injectable()
@@ -12,7 +15,14 @@ export class SignInProvider {
     @Inject(forwardRef(() => UsersService))
     private readonly usersService: UsersService,
 
-    private readonly hashingProvider: HashingProvider
+    private readonly hashingProvider: HashingProvider,
+
+    /* injecting jwtService */
+    private readonly jwtService: JwtService,
+
+    /* injecting jwtConfigration */
+    @Inject(jwtConfig.KEY)
+    private readonly jwtConfigration: ConfigType<typeof jwtConfig>
 
   ) { }
 
@@ -36,8 +46,23 @@ export class SignInProvider {
         'The password is incorrect, please check your password and try again.');
     }
 
-    // send back JWT TOKEN but for now just return confirmation
-    return true;
+      // send back JWT TOKEN
+    const accessToken = await this.jwtService.signAsync(
+      {
+        sub: user.id,
+        email: user.email
+      }, 
+      {
+        audience: this.jwtConfigration.audience,
+        issuer: this.jwtConfigration.issuer,
+        secret: this.jwtConfigration.secret,
+        expiresIn: this.jwtConfigration.accessTokenTTL
+      }
+      )
+
+      return {
+        access_token: accessToken
+      }
 
 
   }
