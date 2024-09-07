@@ -37,7 +37,6 @@ export class SignInProvider {
     }
 
     // send back JWT TOKEN but for now just return confirmation
-
     return true;
 
 
