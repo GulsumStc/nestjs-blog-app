@@ -10,6 +10,8 @@ import { CreateUserProvider } from './providers/create-user.provider';
 import { FindOneUserByEmailProvider } from './providers/find-one-user-by-email.provider';
 import databaseConfig from 'src/config/database.config';
 import profileConfig from './config/profile.config';
+import jwtConfig from 'src/auth/config/jwt.config';
+import { JwtModule } from '@nestjs/jwt';
 
 /* user module is responsible for all the management of the providers*/
 
@@ -19,6 +21,11 @@ import profileConfig from './config/profile.config';
   exports: [UsersService], // now available to other modules
   imports: [
     forwardRef(() => AuthModule),// circular dependency between auth module and user module
-    TypeOrmModule.forFeature([User]), ConfigModule.forFeature(profileConfig),], 
+    TypeOrmModule.forFeature([User]), ConfigModule.forFeature(profileConfig),
+
+    ConfigModule.forFeature(jwtConfig),// now we can use the access token guard in order to apply AccessTokenGuard to one of the API endpoints inside the users module
+    JwtModule.registerAsync(jwtConfig.asProvider()),
+  ], 
+  
 })
 export class UsersModule {}

@@ -10,6 +10,7 @@ Content-Type: application/json
 
 POST http://localhost:8000/users/create-many
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJlbWFpbCI6ImVsaWZAZG9lLmNvbSIsImlhdCI6MTcyNjA3MjI1NiwiZXhwIjoxNzI2MDc1ODU2LCJhdWQiOiJsb2NhbGhvc3Q6ODAwMCIsImlzcyI6ImxvY2FsaG9zdDo4MDAwIn0.GXEp_4-yEQ1cR0A6V7pltg4Cvz4MVokOa_y1RuyQC68
 {
   "users": [
             {
