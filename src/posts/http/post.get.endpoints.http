@@ -11,4 +11,4 @@ GET http://localhost:8000/posts/
 # ?startDate={{startDate}}
 # &endDate={{endDate}}
 ?limit=3
-&page=2
+&page=1

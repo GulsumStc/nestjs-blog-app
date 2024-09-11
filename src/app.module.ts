@@ -14,6 +14,10 @@ import { PaginationModule } from './common/pagination/pagination.module';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import  environmentValidation from './config/environment.validation';
+import { JwtModule } from '@nestjs/jwt';
+import jwtConfig from './auth/config/jwt.config';
+import { APP_GUARD } from '@nestjs/core';
+import { AccessTokenGuard } from './auth/guards/access-token/access-token.guard';
 
 const ENV = process.env.NODE_ENV;
 console.log(ENV);
@@ -73,6 +77,9 @@ console.log(ENV);
      })
     }),
 
+    ConfigModule.forFeature(jwtConfig),
+    JwtModule.registerAsync(jwtConfig.asProvider()),
+
     TagsModule,
 
     MetaOptionsModule,
@@ -80,6 +87,12 @@ console.log(ENV);
     PaginationModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD, //  the entire application  now is protected by this guard
+      useClass: AccessTokenGuard // applicable throughout our application
+    }
+  ],
 })
 export class AppModule {} //

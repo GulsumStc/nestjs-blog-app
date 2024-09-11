@@ -12,6 +12,8 @@ import databaseConfig from 'src/config/database.config';
 import profileConfig from './config/profile.config';
 import jwtConfig from 'src/auth/config/jwt.config';
 import { JwtModule } from '@nestjs/jwt';
+import { APP_GUARD } from '@nestjs/core';
+import { AccessTokenGuard } from 'src/auth/guards/access-token/access-token.guard';
 
 /* user module is responsible for all the management of the providers*/
 
