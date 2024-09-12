@@ -13,7 +13,7 @@ export const Auth = (...authTypes: AuthType[]) => {
    * Sets metadata with the key "AUTH_TYPE_KEY" and the value being the array of
    * authentication types passed to the decorator.
    */
-  SetMetadata(AUTH_TYPE_KEY, authTypes);
+ return  SetMetadata(AUTH_TYPE_KEY, authTypes);
 };
 
 
