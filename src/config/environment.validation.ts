@@ -40,5 +40,23 @@ export default Joi.object({
     .string()
     .required(),
   
+  /* jwt env variables */
+
+  JWT_SECRET: Joi
+    .string()
+    .required(),
+
+  JWT_TOKEN_AUDIENCE: Joi
+    .string()
+    .required(),
+
+  JWT_TOKEN_ISSUER: Joi
+    .string()
+    .required(),
+
+  JWT_ACCESS_TOKEN_TTL: Joi
+    .number()
+    .required()
+  
   
 })
