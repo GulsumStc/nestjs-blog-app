@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Delete, Put, Param, Query, Body, Headers, Ip, ParseIntPipe, DefaultValuePipe, ValidationPipe, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Put, Param, Query, Body, Headers, Ip, ParseIntPipe, DefaultValuePipe, ValidationPipe, UseGuards, SetMetadata } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUsersDto } from './dtos/patch-users.dto';
@@ -52,6 +52,7 @@ export class UsersController {
 
 
   @Post()
+    @SetMetadata('authType', 'none')
   public createUsers(@Body() createUserDto: CreateUserDto){
     return this.usersService.createUser(createUserDto);
   }
