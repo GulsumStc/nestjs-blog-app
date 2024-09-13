@@ -60,7 +60,6 @@ export class UsersController {
     return this.usersService.createUser(createUserDto);
   }
 
-  @UseGuards(AccessTokenGuard)
   @Post('create-many')
   public createManyUsers(@Body() createManyUserDto: CreateManyUsersDto){
     return this.usersService.createMany(createManyUserDto);
