@@ -18,6 +18,7 @@ import { JwtModule } from '@nestjs/jwt';
 import jwtConfig from './auth/config/jwt.config';
 import { APP_GUARD } from '@nestjs/core';
 import { AccessTokenGuard } from './auth/guards/access-token/access-token.guard';
+import { AuthenticationGuard } from './auth/guards/authentication/authentication.guard';
 
 const ENV = process.env.NODE_ENV;
 console.log(ENV);
@@ -61,13 +62,17 @@ console.log(ENV);
 
     PaginationModule,
   ],
+
   controllers: [AppController],
+
   providers: [
     AppService,
     {
       provide: APP_GUARD, //  the entire application  now is protected by this guard
-      useClass: AccessTokenGuard // applicable throughout our application
-    }
+      useClass: AuthenticationGuard // default guard
+    },
+    /* AuthorizationGuard has dependecy on AccessTokenGuard so we have to provıde it ın providers as well */
+    AccessTokenGuard
   ],
 })
 export class AppModule {} //
