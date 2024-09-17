@@ -1,4 +1,4 @@
-import { IsArray, IsEnum, IsIn, IsInt, IsISO8601, isISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, Matches, MaxLength, MinLength, ValidateNested } from "class-validator";
+import { IsArray, IsDate, IsEnum, IsIn, IsInt, IsISO8601, isISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, Matches, MaxLength, MinLength, ValidateNested } from "class-validator";
 import { PostStatus } from "../enums/postStatus.enum";
 import { PostType } from "../enums/postType.enum";
 import { CreatePostMetaOptionDto } from "../../meta-options/dtos/create-post-meta-option.dto";
@@ -73,7 +73,7 @@ export class CreatePostDto {
     example: '2022-01-01T00:00:00.000Z',
     description: 'The publish date of the post',
   })
-  @IsISO8601() // YYYY-MM-DD
+  @IsDate() // YYYY-MM-DD
   @IsOptional()
   publishOn?: Date;
 

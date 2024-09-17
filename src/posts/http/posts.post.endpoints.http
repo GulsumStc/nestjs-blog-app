@@ -1,15 +1,21 @@
+{{ 
+    exports.publishOn = new Date().toString()
+}}
+
+
 POST http://localhost:8000/posts
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJlbWFpbCI6ImVsaWZAZG9lLmNvbSIsImlhdCI6MTcyNjU5ODkzMCwiZXhwIjoxNzI2NjAyNTMwLCJhdWQiOiJsb2NhbGhvc3Q6ODAwMCIsImlzcyI6ImxvY2FsaG9zdDo4MDAwIn0.Uxsv7lVnH2HOrCWufGByKoEXTJgLBsaS3LwdQVNxORw
 {
   "title": "My four Post",
   "postType": "post",
-  "slug": "my-frjgkg",
+  "slug": "my-frjgkhhg",
   "status": "published",
   "content": "This is the content.",
   "schema": "{\"type\":\"object\"}",
   "featuredImageUrl": "https://example.com/image.jpg",
-  "publishOn": "2024-08-22",
-  // "tags": ["nestjs", "typescript", "backend"],
+  "publishOn":"{{publishOn}}",
+
   "metaOptions": {
     "metaValue": "{\"cascade\": true, \"cascade\":true}"
   },
