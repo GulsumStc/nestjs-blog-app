@@ -19,7 +19,7 @@ export class CreatePostProvider {
     @InjectRepository(Post)
     private postsRepository: Repository<Post>,
 
-  ){}
+  ) { }
 
   public async createPost(createPostDto: CreatePostDto, user: ActiveUserData): Promise<Post> {
 
@@ -27,12 +27,12 @@ export class CreatePostProvider {
     let tags = undefined;
 
     // Find author from database based on user id.
-      author = await this.userService.findOneById(user.sub).catch(() => {
-        throw new ConflictException('The user does not exist', {
+    author = await this.userService.findOneById(user.sub).catch(() => {
+      throw new ConflictException('The user does not exist', {
         cause: error,
-        });
       });
-    
+    });
+
 
     try {
     // finds tags
@@ -49,21 +49,19 @@ export class CreatePostProvider {
     const post = this.postsRepository.create({
       ...createPostDto,
       author: author,
-      tags: tags 
+      tags: tags
     });
 
-  
 
-   try {
-     // return the post to the user
-     return await this.postsRepository.save(post);
-   } catch (error) {
-     throw new ConflictException(error, {
-      description: 'ensure post slug is unique and not a duplicate',
-    })
+
+    try {
+      // return the post to the user
+      return await this.postsRepository.save(post);
+    } catch (error) {
+      throw new ConflictException(error, {
+        description: 'ensure post slug is unique and not a duplicate',
+      })
     }
-    
-    
 
   }
 

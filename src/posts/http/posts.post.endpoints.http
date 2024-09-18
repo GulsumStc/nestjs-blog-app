@@ -5,11 +5,11 @@
 
 POST http://localhost:8000/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJlbWFpbCI6ImVsaWZAZG9lLmNvbSIsImlhdCI6MTcyNjU5ODkzMCwiZXhwIjoxNzI2NjAyNTMwLCJhdWQiOiJsb2NhbGhvc3Q6ODAwMCIsImlzcyI6ImxvY2FsaG9zdDo4MDAwIn0.Uxsv7lVnH2HOrCWufGByKoEXTJgLBsaS3LwdQVNxORw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJlbWFpbCI6ImVsaWZAZG9lLmNvbSIsImlhdCI6MTcyNjY2MTM1MSwiZXhwIjoxNzI2NjY0OTUxLCJhdWQiOiJsb2NhbGhvc3Q6ODAwMCIsImlzcyI6ImxvY2FsaG9zdDo4MDAwIn0.eNz4PlRNb8i6y_p-z10eKHEYPrK3ZWstMrU5V0tlLbc
 {
-  "title": "My four Post",
+  "title": "Post with new createpost dto45543",
   "postType": "post",
-  "slug": "my-frjgkhhg",
+  "slug": "a-s-d-f-s-s-dd",
   "status": "published",
   "content": "This is the content.",
   "schema": "{\"type\":\"object\"}",
@@ -19,7 +19,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJlbWFpb
   "metaOptions": {
     "metaValue": "{\"cascade\": true, \"cascade\":true}"
   },
-  "authorId":1,
-  "tags":[1,2]
+  "tags":[1,5]
   
 }
