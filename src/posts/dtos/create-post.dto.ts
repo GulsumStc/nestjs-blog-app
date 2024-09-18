@@ -108,12 +108,5 @@ export class CreatePostDto {
   @Type(() => CreatePostMetaOptionDto)
   metaOptions?: CreatePostMetaOptionDto | null;// this is not required property but when you pass metaOptions the key value pair is required object
 
-  @ApiProperty({
-    type: 'integer',
-    required: true,
-    example: 1,
-  })
-  @IsInt()
-  @IsNotEmpty()
-  authorId: number;
+
 }
