@@ -12,6 +12,8 @@ import { GetPostsDto } from '../dtos/get-posts.dto';
 import { privateDecrypt } from 'crypto';
 import { PaginationProvider } from 'src/common/pagination/providers/pagination.provider';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
+import { CreatePostProvider } from './create-post.provider';
+import { ActiveUserData } from 'src/auth/interfaces/active-user-data.interface';
 
 @Injectable()
 export class PostsService {
@@ -32,7 +34,10 @@ export class PostsService {
 
     /* injecting paginationProvider */
     @Inject(PaginationProvider)
-    private readonly paginationProvider: PaginationProvider
+    private readonly paginationProvider: PaginationProvider,
+
+    @Inject(CreatePostProvider)
+    private readonly createPostProvider: CreatePostProvider
 
   ) { }
   public async findAll(postQuery: GetPostsDto, userId: string): Promise<Paginated<Post>> {
@@ -51,30 +56,17 @@ export class PostsService {
   
 
 
+
+ 
   /**
-   * Creates a new blog post
-   * 
-   * @param createPostDto the post data to be created
-   * @returns the created post
+   * Creates a new post
+   * @param createPostDto The data needed to create a new post
+   * @param user The user who is creating the post
+   * @returns The newly created post
    */
-  public async createPost(createPostDto: CreatePostDto): Promise<Post> {
-
-    // Find author from database based on authorId. before authentication we do something like this
-    let author = await this.userService.findOneById(createPostDto.authorId);
-
-    // finds tags
-    const tags = await this.tagsService.findMultipleTags(createPostDto.tags);
-
-    // create the post
-    const post = this.postsRepository.create({
-      ...createPostDto,
-      author: author,
-      tags: tags // assign the author to the post
-    });
-
-    // return the post to the user
-    return await this.postsRepository.save(post);
-
+  public async createPost(createPostDto: CreatePostDto, user: ActiveUserData){
+    // delegate the creation of a new post to the createPostProvider
+    return await this.createPostProvider.createPost(createPostDto, user);
   }
 
 
