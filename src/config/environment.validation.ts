@@ -56,7 +56,11 @@ export default Joi.object({
 
   JWT_ACCESS_TOKEN_TTL: Joi
     .number()
-    .required()
+    .required(),
+  
+  JWT_REFRESH_TOKEN_TTL: Joi
+    .number()
+    .required(),
   
   
 })
