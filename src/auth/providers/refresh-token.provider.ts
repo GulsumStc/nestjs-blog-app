@@ -9,7 +9,7 @@ import { UsersService } from 'src/users/providers/users.service';
 import { ActiveUserData } from '../interfaces/active-user-data.interface';
 
 @Injectable()
-export class RefteshTokenProvider {
+export class RefreshTokenProvider {
 
   constructor(
 
