@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AllExceptionsFilter } from './common/error-handling/filters/all-exceptions.filter';
 
 async function bootstrap() { // this funtion bootstraps the application
   const app = await NestFactory.create(AppModule);
@@ -13,6 +14,8 @@ async function bootstrap() { // this funtion bootstraps the application
     transform: true,// it transform the request to an instance of the dto class after validation
     transformOptions: { enableImplicitConversion: true } // to convert types into what you desire
   }));
+
+  app.useGlobalFilters(new AllExceptionsFilter());
 
 
   /* Swagger configuration */
