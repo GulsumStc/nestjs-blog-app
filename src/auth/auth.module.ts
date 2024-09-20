@@ -9,13 +9,14 @@ import { ConfigModule } from '@nestjs/config';
 import jwtConfig from './config/jwt.config';
 import { JwtModule } from '@nestjs/jwt';
 import { GenerateTokensProviders } from './providers/generate-tokens.providers';
+import { RefteshTokenProvider } from './providers/reftesh-token.provider';
 
 @Module({
   controllers: [AuthController],
   providers: [AuthService, {
     provide: HashingProvider,
     useClass: BcryptProvider
-  }, SignInProvider, GenerateTokensProviders],
+  }, SignInProvider, GenerateTokensProviders, RefteshTokenProvider],
   imports: [
     forwardRef(() => UsersModule),
     ConfigModule.forFeature(jwtConfig), // now jwtConfig is available to this module  and can accessable via  help of @InjectConfig() decorator
