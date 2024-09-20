@@ -6,6 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigType } from '@nestjs/config';
 import jwtConfig from '../config/jwt.config';
 import { ActiveUserData } from '../interfaces/active-user-data.interface';
+import { GenerateTokensProviders } from './generate-tokens.providers';
 
 
 @Injectable()
@@ -18,18 +19,13 @@ export class SignInProvider {
 
     private readonly hashingProvider: HashingProvider,
 
-    /* injecting jwtService */
-    private readonly jwtService: JwtService,
-
-    /* injecting jwtConfigration */
-    @Inject(jwtConfig.KEY)
-    private readonly jwtConfigration: ConfigType<typeof jwtConfig>
+    private readonly generateTokensProvider: GenerateTokensProviders,
 
   ) { }
 
-    public async signIn(signinDto: SigninDto) {
+  public async signIn(signinDto: SigninDto) {
+      
     // find the  the user using email ID, if not found throw an error
-
     let user = await this.usersService.findOneByEmail(signinDto.email);
     if (!user) {
       throw new UnauthorizedException(
@@ -47,23 +43,9 @@ export class SignInProvider {
         'The password is incorrect, please check your password and try again.');
     }
 
-      // send back JWT TOKEN
-    const accessToken = await this.jwtService.signAsync(
-      {
-        sub: user.id,
-        email: user.email
-      } as ActiveUserData, 
-      {
-        audience: this.jwtConfigration.audience,
-        issuer: this.jwtConfigration.issuer,
-        secret: this.jwtConfigration.secret,
-        expiresIn: this.jwtConfigration.accessTokenTTL
-      }
-      )
 
-      return {
-        access_token: accessToken
-      }
+      // generate JWT
+      return this.generateTokensProvider.generateTokens(user);
 
 
   }
