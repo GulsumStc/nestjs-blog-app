@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import { Post } from "src/posts/post.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -32,6 +33,7 @@ export class User {
     type: 'varchar',
     length:96
   })
+  @Exclude()// when used with classSerializerInterceptor Interceptor would endsure that this password is not sent back in the response
   password: string;
 
 
