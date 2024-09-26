@@ -62,5 +62,8 @@ export default Joi.object({
     .number()
     .required(),
   
+  API_VERSION: Joi
+    .string()
+  
   
 })

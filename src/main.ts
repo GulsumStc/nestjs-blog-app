@@ -36,7 +36,7 @@ async function bootstrap() { // this funtion bootstraps the application
 
   
   // add global interceptor
-  app.useGlobalInterceptors(new DataResponseInterceptor);
+  // app.useGlobalInterceptors(new DataResponseInterceptor);
 
 
   await app.listen(8000);
