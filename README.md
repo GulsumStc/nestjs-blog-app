@@ -42,3 +42,42 @@ JWT_TOKEN_ISSUER=
 JWT_ACCESS_TOKEN_TTL=
 JWT_REFRESH_TOKEN_TTL=
 API_VERSION=
+```
+
+## Getting Started
+
+To get started with this project, follow these steps:
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js
+- PostgreSQL
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd nestjs-intro
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+     cd nestjs-intro
+   ```
+3. Set up your environment variables in a .env.development file based on the Environment Variables section above.
+4. Run the application:
+    ```bash
+   npm run start
+   ```
+
+
+
+   
+
+
+   
+
+
