@@ -22,21 +22,23 @@ This project is a blog application developed using NestJS, TypeORM, PostgreSQL, 
 - **PostgreSQL**: Relational database for data storage.
 - **JWT**: For user authentication and authorization.
 - **Swagger**: For API documentation.
+- **Compodoc**: A documentation tool for generating API documentation in a static site.
 
-## Getting Started
 
-To get started with this project, follow these steps:
+##Environment Variables
+```bash
+DATABASE_PORT=
+DATABASE_HOST=
+DATABASE_USER=
+DATABASE_PASSWORD=
+DATABASE_NAME=
+DATABASE_SYNCHRONIZE=
 
-### Prerequisites
+PROFILE_API_KEY=
 
-Make sure you have the following installed:
-
-- Node.js
-- PostgreSQL
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd nestjs-intro
+JWT_SECRET=
+JWT_TOKEN_AUDIENCE=
+JWT_TOKEN_ISSUER=
+JWT_ACCESS_TOKEN_TTL=
+JWT_REFRESH_TOKEN_TTL=
+API_VERSION=
