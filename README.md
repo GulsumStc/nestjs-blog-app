@@ -73,7 +73,7 @@ Make sure you have the following installed:
    npm run start
    ```
 
-
+Note: This project is based on a course taken on Udemy to enhance skills in NestJS, and it includes detailed notes taken during the development process.
 
    
 
